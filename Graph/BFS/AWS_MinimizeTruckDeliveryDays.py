@@ -74,13 +74,13 @@ class Solution:
         while(q):
             for i in range(len(q)):
                 cellX, cellY = q.popleft()
-                visited.add(cellX, cellY)                
+                visited.add((cellX, cellY))
                 countCountries -= 1
                 for dx,dy in dirs:
                     x,y = cellX+dx, cellY+dy
                     if inbound(x,y) and map[x][y] == "O":
                         if (x,y) not in visited:
-                            visited.add(cellX, cellY)
+                            visited.add((cellX, cellY))
                             q.append((x,y))
                             countCountries -= 1
             if len(q) > 0:                            
@@ -89,6 +89,24 @@ class Solution:
         
         return days if countCountries == 0 else -1
     
+
+def createMap(mapstr: str) -> List[List[str]]:
+    map = []
+    lines = mapstr.split("\n")
+    for line in lines:
+        chars = line.split(" ")
+        del chars[-1]
+        del chars[0]
+        map.append(chars)
+    return map
+    
+mapstr = "X O X W O X O \n W O W O X W O \n W W N O W W O \n W O O O W W O \n X X W O W O X"
+map = createMap(mapstr)
+print(map)
+
+sln = Solution()
+ans = sln.deliveryCost(mapstr)
+print(ans)
 
 
     
