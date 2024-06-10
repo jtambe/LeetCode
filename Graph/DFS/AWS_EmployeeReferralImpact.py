@@ -67,7 +67,7 @@ class solution:
 sln = solution()
 referrals = [[1,2],[1,3],[1,4],[1,5],[2,3],[2,6],[6,8]]
 # d {1: {2, 3, 4, 5}, 2: {3, 6}, 3: set(), 4: set(), 5: set(), 6: {8}, 8: set()}
-# expected output : {1:6, 2:3, 3:0, 4: 0, 5:0, 6:2, 8: 0}
+# expected output : {1: 6, 2: 3, 3: 0, 4: 0, 5: 0, 6: 1, 8: 0}
 ans = sln.referralImpact(referrals)
 print(ans)
 
