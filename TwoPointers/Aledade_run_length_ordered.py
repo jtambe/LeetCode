@@ -63,7 +63,13 @@ def solution(A, Y):
 
     return ans
 
+
 def increasingList(A:List[int], Y:int) -> List[int]:
+    """ 
+    Returns a list of index numbers for increasing sequence
+    param A: list of values
+    param Y: run length
+    """
     increasing: List[int] = []
     l,r, count = 0, 0, 0
     while (r < len(A)-1):
@@ -85,6 +91,11 @@ def increasingList(A:List[int], Y:int) -> List[int]:
     return increasing
 
 def decreasingList(A:List[int], Y:int) -> List[int]:
+    """ 
+    Returns a list of index numbers for decreasing sequence
+    param A: list of values
+    param Y: run length
+    """
     decreasing: List[int] = []
     l,r, count = 0, 0, 0
     while (r < len(A)-1):
@@ -106,6 +117,11 @@ def decreasingList(A:List[int], Y:int) -> List[int]:
     return decreasing
     
 def mergeListsInorder(increasing: List[int], decreasing: List[int]) -> List[int]:
+    """ 
+    Returns a list of merged sequences in ascending order
+    param increasing: list of increasing index numbers
+    param decreasing: list of decreasing index numbers
+    """
     
     #edge case
     # if one or both lists are empty
