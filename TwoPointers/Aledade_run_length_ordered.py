@@ -46,11 +46,11 @@ def solution(A, Y):
 
     # increasing index numbers list
     # O(n)
-    increasing = increasingList(A, Y)
+    increasing = getIndexNumbers(A, Y, isIncreasing = True)
 
     # decreasing index numbers list
     # O(n)
-    decreasing = decreasingList(A, Y)
+    decreasing = getIndexNumbers(A, Y, isIncreasing = False)
 
     # # add two lists & sort
     # # O(nlogn)
@@ -64,22 +64,22 @@ def solution(A, Y):
     return ans
 
 
-def increasingList(A:List[int], Y:int) -> List[int]:
+def getIndexNumbers(A:List[int], Y:int, isIncreasing: bool) -> List[int]:
     """ 
-    Returns a list of index numbers for increasing sequence
+    Returns a list of index numbers for increasing or decreasing sequence
     param A: list of values
     param Y: run length
     """
-    increasing: List[int] = []
+    sequence: List[int] = []
     l,r, count = 0, 0, 0
     while (r < len(A)-1):
         # if consecutive numbers are increasing, we increment the right pointer & counter
         # once we find increasing run_length, we just move left pointer
-        if (A[r] + 1 == A[r+1]):
+        if (A[r] + 1 == A[r+1] if isIncreasing  else A[r] - 1 == A[r+1]):
             r += 1
             count += 1
             if (count == Y-1):
-                increasing.append(l)
+                sequence.append(l)
                 count -= 1
                 l += 1
         # if consecutive numbers are not increasing, we simply move both pointers
@@ -88,33 +88,8 @@ def increasingList(A:List[int], Y:int) -> List[int]:
             r += 1
             l = r
             count = 0
-    return increasing
+    return sequence
 
-def decreasingList(A:List[int], Y:int) -> List[int]:
-    """ 
-    Returns a list of index numbers for decreasing sequence
-    param A: list of values
-    param Y: run length
-    """
-    decreasing: List[int] = []
-    l,r, count = 0, 0, 0
-    while (r < len(A)-1):
-        # if consecutive numbers are decreasing, we increment the right pointer & counter
-        # once we find decreasing run_length, we just move left pointer
-        if (A[r] - 1 == A[r+1]):
-            r += 1
-            count += 1
-            if (count == Y-1):
-                decreasing.append(l)
-                count -= 1
-                l += 1
-        # if consecutive numbers are not decreasing, we simply move both pointers
-        # additionally, we mark count = 0 to wipe off counter because of previous run_length data
-        else:
-            r += 1
-            l = r
-            count = 0
-    return decreasing
     
 def mergeListsInorder(increasing: List[int], decreasing: List[int]) -> List[int]:
     """ 
