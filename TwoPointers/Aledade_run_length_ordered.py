@@ -155,41 +155,6 @@ def mergeListsInorder(increasing: List[int], decreasing: List[int]) -> List[int]
     
 
 
-    
-    #edge case
-    # if one or both lists are empty
-    if (len(increasing) == 0):
-        return decreasing
-    if (len(decreasing) == 0):
-        return increasing
-    
-    
-    ans: List[int] = []
-    # left pointer for increasing length
-    # right pointer for decreasing length
-    # while the smallest list has values, compare numbers in two lists and add smaller number in answer
-    # increment the correct pointer
-    l,r = 0,0
-    while (l < len(increasing) and r < len(decreasing)):
-        if (increasing[l] < decreasing[r]):
-            ans.append(increasing[l])
-            l += 1
-        else:
-            ans.append(decreasing[r])
-            r += 1
-
-    #print(f"ans: {ans}")
-    # once the smallest list is complete, merge rest of the values from larger list
-    if (len(decreasing[r:]) > 0):
-        ans.extend(decreasing[r:])
-    if (len(increasing[l:]) > 0):
-        ans.extend(increasing[l:])
-    
-    return ans
-
-
-
-
 values=[1, 2, 3, 5, 10, 9, 8, 9, 10, 11, 7,8,7]
 run_length=3
 ans = solution(values, run_length)
