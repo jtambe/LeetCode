@@ -73,8 +73,8 @@ def getIndexNumbers(A:List[int], Y:int, isIncreasing: bool) -> List[int]:
     sequence: List[int] = []
     l,r, count = 0, 0, 0
     while (r < len(A)-1):
-        # if consecutive numbers are increasing, we increment the right pointer & counter
-        # once we find increasing run_length, we just move left pointer
+        # if consecutive numbers are increasing or decreasing, we increment the right pointer & counter
+        # once we find the run_length count, we just move left pointer
         if (A[r] + 1 == A[r+1] if isIncreasing  else A[r] - 1 == A[r+1]):
             r += 1
             count += 1
@@ -82,7 +82,7 @@ def getIndexNumbers(A:List[int], Y:int, isIncreasing: bool) -> List[int]:
                 sequence.append(l)
                 count -= 1
                 l += 1
-        # if consecutive numbers are not increasing, we simply move both pointers
+        # if consecutive numbers are not increasing or decreasing, we simply move both pointers
         # additionally, we mark count = 0 to wipe off counter because of previous run_length data
         else:
             r += 1
