@@ -171,3 +171,17 @@ run_length=0
 ans = solution(values, run_length)
 print(f"ans:{ans}")
 
+# values=[x for x in range(1,1000000)]
+# run_length=100
+# ans = solution(values, run_length)
+# print(f"ans:{ans}")
+
+values=[x for x in range(1,100)]
+run_length=10
+ans = solution(values, run_length)
+print(f"ans:{ans}")
+
+values=[x for x in range(-100,100, -1)]
+run_length=5
+ans = solution(values, run_length)
+print(f"ans:{ans}")
