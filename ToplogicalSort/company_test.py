@@ -59,8 +59,6 @@ def getTasksToRun(allTasks: List[Task], tasksToRun: List[str]) -> List[str]:
    q = Deque()
 
 
-
-
    def getTaskObjectbyId(id:str): # would build a dictionary later
        for task in allTasks:   
            # print(f'task.id: {task.id}')
@@ -81,8 +79,7 @@ def getTasksToRun(allTasks: List[Task], tasksToRun: List[str]) -> List[str]:
                        q.append(dep)
       
        myVar = list(reversed(intermediateSteps))
-       for item in myVar:
-           ans.append(item)
+       [ans.append(item) for item in myVar if item not in ans]
 
 
 
