@@ -23,6 +23,8 @@ Constraints:
 -104 <= target <= 104
 """
 
+from typing import List
+
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         """
