@@ -25,6 +25,28 @@ class Solution:
         return ans
 
 
+    
+    def nextGreaterElement_similar_solution_as_503(self, nums1: List[int], nums2: List[int]) -> List[int]:
+
+        monotonic_stack = []
+        dictionary = {item:-1 for item in nums1}
+
+        for i in range(len(nums2)-1, -1, -1):
+
+            while monotonic_stack and monotonic_stack[-1] <= nums2[i]:
+                monotonic_stack.pop()
+
+            if nums2[i] in dictionary:
+                if monotonic_stack and monotonic_stack[-1] > nums2[i]:
+                    dictionary[nums2[i]] = monotonic_stack[-1]
+                if not monotonic_stack:
+                    dictionary[nums2[i]] = -1
+
+            monotonic_stack.append(nums2[i])
+
+        return list(dictionary.values())
+
+
 
 
         # ans = [-1 for i in range(len(nums1))]
