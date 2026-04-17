@@ -19,7 +19,7 @@ Implement a data structure that can efficiently process such queries.
 
 
 
-class UserStatistics_old:
+class UserStatistics_dictionary:
 
     def __init__(self, window: int, limit: int):
         self.userEvents = {}
@@ -58,7 +58,7 @@ class UserStatistics_old:
         return answer
     
 
-class UserStatistics:
+class UserStatistics_dictionary_binarySearch:
 
     def __init__(self, window: int, limit: int):
         self.userEvents = {} # {user_id: {timestamp: cumulative_event_count}}
@@ -127,3 +127,34 @@ class UserStatistics:
                 
         
         return answer
+    
+from collections import deque
+
+class UserStatistics_optimal:
+
+    def __init__(self, window: int, limit: int):
+        self.event_queue = deque()          # [(timestamp, user_id)]
+        self.user_count = {}                # user_id -> count inside window
+        self.robot_count = 0               # users with count >= limit
+        self.window = window
+        self.limit = limit
+
+    def _expire(self, now: int):
+        while self.event_queue and self.event_queue[0][0] < now - self.window:
+            timestamp, user_id = self.event_queue.popleft()
+            self.user_count[user_id] -= 1
+            if self.user_count[user_id] == self.limit - 1:  # just dropped below
+                self.robot_count -= 1
+            if self.user_count[user_id] == 0:
+                del self.user_count[user_id]
+
+    def event(self, now: int, user_id: int):
+        self._expire(now)
+        self.event_queue.append((now, user_id))
+        self.user_count[user_id] = self.user_count.get(user_id, 0) + 1
+        if self.user_count[user_id] == self.limit:   # just crossed up to limit
+            self.robot_count += 1
+
+    def get_robot_count(self, now: int):
+        self._expire(now)
+        return self.robot_count
