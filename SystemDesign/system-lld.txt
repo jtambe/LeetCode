@@ -1,0 +1,130 @@
+1. Data model
+2. API endpoint definitions
+
+1. multi tenant application of global scale
+2. Documents - terms of service, limited liability
+3. Photos - parking lot from outside, example parking space
+
+4. Run nightly job that stores next 7 days of open slots, removed prev days
+
+
+Table - 
+
+1. Garage
+id: bigint (PK)
+street:
+city: varchar (index)
+zip: int (index)
+NumberOfSpots: int
+PricePerHour: Decimal
+Documents: varchar s3 bucket
+Photos: varchar s3 bucket
+CreatedAt:
+CreatedBy:
+UpdatedAt:
+UpdatedBy:
+
+2. ParkingSpots
+id: bigint (PK)
+Garage_id: (FK)
+CreatedAt:
+CreatedBy:
+UpdatedAt:
+UpdatedBy:
+
+8. GaragePricing
+Garage_id:
+Date:
+PricePerHour: Decimal
+
+
+3. Users
+id: bigint (PK)
+role:
+first_name:
+last_name:
+phone:
+email:
+street:
+city:
+county:
+
+4. User_Roles
+id: bigint (PK)
+user_id:
+role_id:
+CreatedAt:
+CreatedBy:
+UpdatedAt:
+UpdatedBy:
+
+5. Roles
+id: bigint (PK)
+role:
+CreatedAt:
+CreatedBy:
+UpdatedAt:
+UpdatedBy:
+
+
+6. AvailableSpots
+id:
+ParkingSpot_id:
+Garage_id:
+From_time: datetime
+To_time:
+Status: open/ pending/ reserved
+
+
+7. Order
+id:
+ParkingSpot_id:
+Garage_id:
+From_time: datetime
+To_time:
+User_id:
+Status: (reserved/ canceled)
+
+
+Endpoints
+1. create parking lot
+2. find avaialble 
+3. reserve space
+
+
+auth - garagae owner/ mindbody admin
+1. Creation
+// takes in json payload
+{
+    street:
+    city: varchar (index)
+    zip: int (index)
+    NumberOfSpots: int
+    PricePerHour: Decimal
+}
+201 - id for garage
+
+auth -> user role is garage owner/ mindbody admin
+def upload_garagemetadata(request)
+// takes in media payload
+upload the blob
+get the url of that blob
+update garage record in table
+return true on success or false // both cases 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
