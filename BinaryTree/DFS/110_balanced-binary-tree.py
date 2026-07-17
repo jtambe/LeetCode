@@ -73,5 +73,3 @@ class Solution:
             return (is_balanced, height)
 
         return dfs(root)[0]
-
-        
