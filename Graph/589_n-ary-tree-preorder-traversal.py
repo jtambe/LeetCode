@@ -16,7 +16,7 @@ class Solution:
         q = Deque()
         output = []
 
-        q.appendleft(root)
+        q.appendleft(root) # appendleft is very unique function in deque and not commonly used
 
         while(q):
             
@@ -24,7 +24,7 @@ class Solution:
             output.append(cur.val)
 
             for child in reversed(cur.children):
-                q.appendleft(child)
+                q.appendleft(child) # appendleft is very unique function in deque and not commonly used
 
         return output
 
